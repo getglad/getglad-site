@@ -499,10 +499,10 @@ a:hover {
    ============================================================ */
 .hero {
   display: grid;
-  grid-template-columns: 1.55fr 0.8fr;
+  grid-template-columns: 1.5fr 0.9fr;
   gap: 52px;
-  align-items: center;
-  padding: 76px 0 60px;
+  align-items: start;
+  padding: 72px 0 60px;
 }
 .hero__text {
   display: flex;
@@ -510,8 +510,10 @@ a:hover {
   gap: 22px;
 }
 .hero__text h1 {
-  max-width: 600px;
+  max-width: 620px;
   margin: 0;
+  font-size: clamp(1.8rem, 1.05rem + 2.6vw, 2.5rem);
+  line-height: 1.15;
 }
 .hero__lead {
   max-width: 540px;
