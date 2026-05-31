@@ -1,0 +1,17 @@
+---
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+
+// New posts (non-legacy) live at /writing/<slug>/.
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft && !data.legacy);
+  return posts.map((post) => ({ params: { slug: post.data.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<PostLayout post={post}>
+  <Content />
+</PostLayout>

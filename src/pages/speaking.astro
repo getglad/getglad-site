@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TalkCard from '../components/TalkCard.astro';
+import { service } from '../data/service';
+
+const talks = (await getCollection('talks')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const rendered = await Promise.all(
+  talks.map(async (talk) => ({ talk, Content: (await render(talk)).Content })),
+);
+---
+
+<BaseLayout
+  title="Speaking"
+  description="Talks on cloud security and the neoclouds, plus service to the cloud-security community."
+  noindex
+>
+  <div class="container container--blog" style="padding-top:72px">
+    <div class="page-head">
+      <span class="label">Speaking</span>
+      <h1 class="h1">Talks &amp; service.</h1>
+      <p class="body-lg">
+        Talks on cloud security and the neoclouds, plus a little community service.
+      </p>
+    </div>
+
+    {
+      rendered.map(({ talk, Content }) => (
+        <TalkCard talk={talk}>
+          <Content />
+        </TalkCard>
+      ))
+    }
+
+    <section style="margin-top:48px">
+      <h2 class="h2" style="margin-bottom:8px">Service</h2>
+      <ul class="cv-list">
+        {
+          service.map((s) => (
+            <li>
+              <span class="cv-label">{s.href ? <a href={s.href}>{s.org}</a> : s.org}</span>
+              <span class="cv-aside">{[s.role, s.period].filter(Boolean).join(' · ')}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

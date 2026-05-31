@@ -1,0 +1,33 @@
+---
+import { SITE_TITLE, SITE_AUTHOR, NAV_LINKS } from '../consts';
+import SocialLinks from './SocialLinks.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="logo" aria-label={`${SITE_TITLE} — home`}>
+        <span class="monogram">mg_</span>
+        <span class="wordmark">{SITE_TITLE}</span>
+      </a>
+      <span class="small muted">
+        Cloud security, agentic security research, and notes from the hard way.
+      </span>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <span class="label">Pages</span>
+        {NAV_LINKS.map((link) => <a href={link.href}>{link.label}</a>)}
+      </div>
+      <div class="footer-col">
+        <span class="label">Elsewhere</span>
+        <SocialLinks display="labels" />
+      </div>
+    </div>
+  </div>
+  <div class="footer-copy">
+    <span class="small faint">© {year} {SITE_AUTHOR}</span>
+  </div>
+</footer>

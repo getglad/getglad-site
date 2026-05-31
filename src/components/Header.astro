@@ -1,0 +1,38 @@
+---
+import { SITE_TITLE, NAV_LINKS } from '../consts';
+import SocialLinks from './SocialLinks.astro';
+
+const path = Astro.url.pathname;
+const isActive = (href: string): boolean => {
+  // "Writing" also covers dated legacy permalinks (/YYYY/MM/DD/slug/).
+  if (href === '/writing/') return path.startsWith('/writing/') || /^\/\d{4}\//.test(path);
+  return path === href || path.startsWith(href);
+};
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo" aria-label={`${SITE_TITLE} — home`}>
+      <span class="monogram">mg_</span>
+      <span class="wordmark">{SITE_TITLE}</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <ul>
+        {
+          NAV_LINKS.map((link) => (
+            <li>
+              <a
+                class="nav-link"
+                href={link.href}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <span class="nav-socials"><SocialLinks display="icons" /></span>
+    </nav>
+  </div>
+</header>

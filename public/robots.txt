@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://getglad.me/sitemap-index.xml

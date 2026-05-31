@@ -1,0 +1,6 @@
+dist
+node_modules
+pnpm-lock.yaml
+.astro
+# Migrated posts are preserved verbatim — don't reflow them.
+src/content

@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+import headshot from '../assets/headshot.jpg';
+
+interface Props {
+  caption?: string | false;
+  class?: string;
+}
+const { caption = 'weird cloudsec person', class: klass } = Astro.props;
+---
+
+<figure class:list={['portrait', klass]}>
+  <div class="portrait__frame">
+    <Image src={headshot} alt="Matthew Gladney" width={600} height={600} loading="eager" />
+  </div>
+  {caption && <figcaption class="portrait__caption">{caption}</figcaption>}
+</figure>

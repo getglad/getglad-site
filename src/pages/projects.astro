@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(
+  projects.map(async (project) => ({ project, Content: (await render(project)).Content })),
+);
+---
+
+<BaseLayout
+  title="Projects"
+  description="Cloud security tooling and agentic security — the projects behind the writing."
+>
+  <div class="container container--blog" style="padding-top:72px">
+    <div class="page-head">
+      <span class="label">Projects</span>
+      <h1 class="h1">Things I’ve built.</h1>
+      <p class="body-lg">
+        Cloud security tooling and agentic security, mostly — the projects behind the writing.
+      </p>
+    </div>
+
+    {
+      rendered.map(({ project, Content }) => (
+        <ProjectCard project={project}>
+          <Content />
+        </ProjectCard>
+      ))
+    }
+  </div>
+</BaseLayout>

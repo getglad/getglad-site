@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Portrait from '../components/Portrait.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import { patents } from '../data/patents';
+
+const companies = ['Capital One', 'HashiCorp', 'DivvyCloud', 'Stacklet', 'Rapid7', 'NVIDIA'];
+const facts: [string, string][] = [
+  ['Working in cloud security since', '2017'],
+  ['Largest program', '25k+ AWS accounts · 10M+ assets'],
+];
+const proud = [
+  'Unblocked developers at a top-10 US bank — translated banking regulation into IAM controls, and built software guardrails where IAM ran out.',
+  'Built four production CMDBs and a CIEM platform when nothing on the market could handle the scale.',
+  'Was first responder on a headline cybersecurity incident — forensic collection across 10PB+ of object storage.',
+  'Earned two patents as primary author, for cloud data analysis at scale.',
+  'Became a founding member of NVIDIA’s Security Agents for Vulnerability Operations.',
+];
+---
+
+<BaseLayout
+  title="About"
+  description="Matthew Gladney — cloud security and agentic security research. I build platforms that keep developers fast and security teams happy."
+>
+  <div class="container" style="padding-top:64px">
+    <section class="about-intro">
+      <div class="about-intro__text">
+        <span class="label">About</span>
+        <h1 class="display">I kinda have a weird job.</h1>
+        <p class="prose-p" style="color:var(--fg-1);max-width:540px">
+          I build platforms that give developers the autonomy they need while keeping security teams
+          happy — and I write about the parts I had to learn the hard way.
+        </p>
+        <div class="about-socials"><SocialLinks display="icon-label" /></div>
+      </div>
+      <Portrait class="about-intro__portrait" />
+    </section>
+
+    <section style="margin-top:48px;max-width:640px">
+      <span class="label" style="display:block;margin-bottom:10px">Currently</span>
+      <p class="prose-p" style="color:var(--fg-1)">
+        A founding member of NVIDIA’s Security Agents for Vulnerability Operations, and a member of
+        the CVE Artificial Intelligence Working Group with MITRE. Mostly: building agents that scale
+        vulnerability operations.
+      </p>
+    </section>
+
+    <section class="facts">
+      {
+        facts.map(([k, v]) => (
+          <div class="fact">
+            <span class="small muted">{k}</span>
+            <span class="body fact__value">{v}</span>
+          </div>
+        ))
+      }
+    </section>
+
+    <section class="measure">
+      <h2 class="h2" style="margin-bottom:16px">The short version</h2>
+      <p class="prose-p" style="color:var(--fg-1);margin-bottom:18px">
+        Over fifteen years I’ve built CMDB and CIEM platforms and helped secure environments
+        spanning 25,000+ AWS accounts and 10M+ assets. The environments I work on tend to break
+        vendors — when off-the-shelf tools can’t analyze millions of assets or traverse IAM across
+        thousands of accounts, we build our own.
+      </p>
+      <p class="prose-p" style="color:var(--fg-1);margin-bottom:18px">
+        A lot of the job is unglamorous plumbing: delivering CSPM visibility across tens of
+        thousands of accounts, killing off long-lived AWS keys with a short-term token service,
+        distributing IAM through GitOps, and standing up self-service provisioning so teams can move
+        without filing tickets. It has survived two acquisitions and scaled to some of the largest
+        cloud deployments in the industry.
+      </p>
+      <p class="body muted">Along the way: {companies.join(', ')}.</p>
+    </section>
+
+    <section style="margin-top:52px;max-width:720px">
+      <h2 class="h2" style="margin-bottom:6px">Five things I’m proud of</h2>
+      <ul class="proud">
+        {
+          proud.map((item, i) => (
+            <li>
+              <span class="proud__n">{String(i + 1).padStart(2, '0')}</span>
+              <span class="body" style="color:var(--fg-1)">
+                {item}
+                {i === 3 && (
+                  <span class="proud__patents">
+                    {patents.map((pt) => (
+                      <a href={pt.href} target="_blank" rel="noopener">
+                        {pt.id} →
+                      </a>
+                    ))}
+                  </span>
+                )}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

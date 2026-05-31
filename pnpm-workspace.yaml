@@ -1,0 +1,7 @@
+# Single-package repo. pnpm 11 records native-build-script approvals here
+# (moved out of package.json). Allow the bundler (esbuild) and image
+# processor (sharp) to run their install scripts so Astro's build and
+# image optimization work.
+allowBuilds:
+  esbuild: true
+  sharp: true

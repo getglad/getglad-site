@@ -1,0 +1,59 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  talk: CollectionEntry<'talks'>;
+}
+const { talk } = Astro.props;
+const d = talk.data;
+
+const roleLabel =
+  d.role === 'speaker+organizer'
+    ? 'Speaker · organizing committee'
+    : d.role === 'organizer'
+      ? 'Organizing committee'
+      : 'Speaker';
+
+const dateText = new Intl.DateTimeFormat('en-US', {
+  ...(d.upcoming ? { month: 'long' } : {}),
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(d.date);
+
+const meta = [d.event, dateText, d.location, roleLabel].filter(Boolean).join(' · ');
+---
+
+<article class="card">
+  <div class="card__head">
+    <h3 class="h3">{d.title}</h3>
+    {d.upcoming && <span class="card__status">upcoming</span>}
+  </div>
+  <p class="small muted" style="margin-top:6px">{meta}</p>
+
+  <div class="card__body"><slot /></div>
+
+  {
+    d.youtubeId && (
+      <div class="video">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${d.youtubeId}`}
+          title={`Video: ${d.title}`}
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      </div>
+    )
+  }
+
+  <p class="card__links">
+    {d.eventUrl && <a href={d.eventUrl}>Event →</a>}
+    {d.slidesUrl && <a href={d.slidesUrl}>Slides →</a>}
+    {
+      d.youtubeId && (
+        <a href={`https://www.youtube.com/watch?v=${d.youtubeId}`}>Watch on YouTube →</a>
+      )
+    }
+  </p>
+</article>

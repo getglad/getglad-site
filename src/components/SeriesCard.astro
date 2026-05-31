@@ -1,0 +1,35 @@
+---
+import type { SeriesView } from '../utils/series';
+
+interface Props {
+  series: SeriesView;
+}
+const { series } = Astro.props;
+---
+
+<article class="series-card">
+  <div class="series-card__head">
+    <span class="series-tag-mono">series</span>
+    <span class="small muted">{series.status}</span>
+  </div>
+  <div>
+    <h3 class="h3">{series.name}</h3>
+    {series.blurb && <p class="body series-card__blurb">{series.blurb}</p>}
+  </div>
+  <ol class="series-parts">
+    {
+      series.parts.map((pt) => (
+        <li>
+          <a class="series-part" href={pt.url}>
+            <span class:list={['series-part__n', !pt.done && 'series-part__n--todo']}>
+              {String(pt.n).padStart(2, '0')}
+            </span>
+            <span class:list={['series-part__title', !pt.done && 'series-part__title--todo']}>
+              {pt.title}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</article>

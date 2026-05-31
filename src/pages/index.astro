@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Portrait from '../components/Portrait.astro';
+import SeriesCard from '../components/SeriesCard.astro';
+import PostRow from '../components/PostRow.astro';
+import { SITE_TAGLINE } from '../consts';
+import { getSeries, oneOffs } from '../utils/series';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const series = getSeries(posts);
+const recent = oneOffs(posts).slice(0, 3);
+---
+
+<BaseLayout>
+  <div class="container">
+    <section class="hero">
+      <div class="hero__text">
+        <span class="label">Cloud security · agentic security research</span>
+        <h1 class="display">{SITE_TAGLINE}</h1>
+        <p class="body-lg hero__lead">
+          I build platforms that give developers the autonomy they need while keeping security teams
+          happy. Mostly I write full-stack applications, design architectures, and occasionally
+          explain why “just open port 22 to 0.0.0.0/0” isn’t a great idea.
+        </p>
+        <p class="small hero__credentials">
+          Two patents · in and around cloud security since 2017 · previously Capital One, HashiCorp,
+          DivvyCloud, Stacklet and Rapid7 · now NVIDIA.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="/writing/">Read the writing</a>
+          <a class="btn btn--link" href="/about/">More about me →</a>
+        </div>
+      </div>
+      <Portrait class="hero__portrait" />
+    </section>
+
+    <hr class="hr" />
+
+    {
+      series.length > 0 && (
+        <section class="sec">
+          <div class="sec__head">
+            <h2 class="h2">Series</h2>
+            <a class="btn btn--link btn--sm" href="/writing/">
+              All series →
+            </a>
+          </div>
+          <p class="body sec__intro">
+            Longer arcs I’m building out a part at a time — read in order, or jump in.
+          </p>
+          <div class="series-stack">
+            {series.map((s) => (
+              <SeriesCard series={s} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="sec">
+      <div class="sec__head">
+        <h2 class="h2">Recent writing</h2>
+        <a class="btn btn--link btn--sm" href="/writing/">All posts →</a>
+      </div>
+      <p class="body sec__intro">
+        One-off posts. I blog infrequently and poorly, but this is what I’ve got.
+      </p>
+      <div>{recent.map((post) => <PostRow post={post} />)}</div>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,57 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const d = project.data;
+
+const STATUS_LABELS: Record<typeof d.status, string> = {
+  active: 'active',
+  'open-sourcing': 'open-sourcing',
+  series: 'series',
+  archived: 'archived',
+};
+---
+
+<article class="card">
+  <div class="card__head">
+    <h3 class="h3">{d.title}</h3>
+    <span class="card__status">{STATUS_LABELS[d.status]}</span>
+  </div>
+
+  <div class="card__body">
+    <slot />
+  </div>
+
+  {
+    d.highlights.length > 0 && (
+      <ul class="highlights">
+        {d.highlights.map((h) => (
+          <li>{h}</li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    d.tech.length > 0 && (
+      <ul class="chips" aria-label="Technologies">
+        {d.tech.map((tech) => (
+          <li class="chip">{tech}</li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    (d.repoUrl || d.link || d.license) && (
+      <p class="card__links">
+        {d.repoUrl && <a href={d.repoUrl}>Repo →</a>}
+        {d.link && <a href={d.link}>Details →</a>}
+        {d.license && <span class="small muted">{d.license}</span>}
+      </p>
+    )
+  }
+</article>

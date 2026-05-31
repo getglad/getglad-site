@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SeriesCard from '../../components/SeriesCard.astro';
+import PostRow from '../../components/PostRow.astro';
+import { getSeries, oneOffs } from '../../utils/series';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const series = getSeries(posts);
+const writing = oneOffs(posts);
+---
+
+<BaseLayout
+  title="Writing"
+  description="Notes from the hard way — cloud security, agentic security, IaC, and automation."
+>
+  <div class="container container--blog" style="padding-top:72px">
+    <div class="page-head">
+      <span class="label">Writing</span>
+      <h1 class="h1">Notes from the hard way.</h1>
+      <p class="body-lg">
+        Things I learned the hard way. Sometimes they intersect with work; sometimes I just get
+        curious, try a thing, and summarize it.
+      </p>
+    </div>
+
+    {
+      series.length > 0 && (
+        <section style="margin-bottom:48px">
+          <div class="sec__head" style="margin-bottom:16px">
+            <h2 class="h2">Series</h2>
+            <span class="small muted">multi-part, read in order</span>
+          </div>
+          <div class="series-stack">
+            {series.map((s) => (
+              <SeriesCard series={s} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section>
+      <h2 class="h2" style="margin-bottom:8px">Writing</h2>
+      <div>{writing.map((post) => <PostRow post={post} />)}</div>
+    </section>
+  </div>
+</BaseLayout>

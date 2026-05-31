@@ -1,0 +1,18 @@
+[tools]
+node = "22"
+pnpm = "11"
+
+[tasks.dev]
+run = "pnpm dev"
+
+[tasks.build]
+run = "pnpm build"
+
+[tasks.preview]
+run = "pnpm preview"
+
+[tasks.check]
+run = "pnpm check"
+
+[tasks.format]
+run = "pnpm format"
