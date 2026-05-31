@@ -2,9 +2,10 @@
 export const SITE_URL = 'https://getglad.me';
 export const SITE_TITLE = 'Matthew Gladney';
 export const SITE_DESCRIPTION =
-  'Cloud security and agentic security research. I write software and try to secure cloud providers.';
+  'I write software that secures cloud providers and AI agents — with AI agents. Cloud and AI security engineering, at scale.';
 export const SITE_AUTHOR = 'Matthew Gladney';
-export const SITE_TAGLINE = 'I write software and try to secure cloud providers.';
+export const SITE_TAGLINE =
+  'Hi, I’m Matthew. I write software that secures cloud providers and AI agents, with AI agents.';
 
 /** Primary navigation. The wordmark links home; keep this list tight. */
 export const NAV_LINKS: { label: string; href: string }[] = [

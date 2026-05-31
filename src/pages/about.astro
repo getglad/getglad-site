@@ -4,44 +4,66 @@ import Portrait from '../components/Portrait.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import { patents } from '../data/patents';
 
-const companies = ['Capital One', 'HashiCorp', 'DivvyCloud', 'Stacklet', 'Rapid7', 'NVIDIA'];
 const facts: [string, string][] = [
-  ['Working in cloud security since', '2017'],
-  ['Largest program', '25k+ AWS accounts · 10M+ assets'],
-];
-const proud = [
-  'Unblocked developers at a top-10 US bank — translated banking regulation into IAM controls, and built software guardrails where IAM ran out.',
-  'Built four production CMDBs and a CIEM platform when nothing on the market could handle the scale.',
-  'Was first responder on a headline cybersecurity incident — forensic collection across 10PB+ of object storage.',
-  'Earned two patents as primary author, for cloud data analysis at scale.',
-  'Became a founding member of NVIDIA’s Security Agents for Vulnerability Operations.',
+  ['Working in cloud', '10+ years'],
+  ['Largest program', '25,000+ AWS accounts · 13M+ assets'],
 ];
 ---
 
 <BaseLayout
   title="About"
-  description="Matthew Gladney — cloud security and agentic security research. I build platforms that keep developers fast and security teams happy."
+  description="Matthew Gladney — cloud and AI security engineering leader building identity-centric security at massive scale."
 >
   <div class="container" style="padding-top:64px">
     <section class="about-intro">
       <div class="about-intro__text">
         <span class="label">About</span>
-        <h1 class="display">I kinda have a weird job.</h1>
+        <h1 class="display">Identity-centric security, at massive scale.</h1>
         <p class="prose-p" style="color:var(--fg-1);max-width:540px">
-          I build platforms that give developers the autonomy they need while keeping security teams
-          happy — and I write about the parts I had to learn the hard way.
+          A cloud and AI security engineering leader — and a 2x acquisition survivor.
         </p>
         <div class="about-socials"><SocialLinks display="icon-label" /></div>
       </div>
       <Portrait class="about-intro__portrait" />
     </section>
 
-    <section style="margin-top:48px;max-width:640px">
-      <span class="label" style="display:block;margin-bottom:10px">Currently</span>
+    <section class="measure" style="margin-top:48px">
+      <p class="prose-p" style="color:var(--fg-1);margin-bottom:18px">
+        Most days, I take on the security problems that don’t have an answer yet — first it was
+        cloud at the scale that broke a lot of vendors, and now defining how AI agents should work
+        securely. To me, the through-line is the same: a workload may eventually do something you
+        didn’t intend, and we have to design a security posture that anticipates and mitigates the
+        potential for impact. I also believe great security accelerates rather than blocks
+        innovation.
+      </p>
+      <p class="prose-p" style="color:var(--fg-1);margin-bottom:18px">
+        Agents are where more of my work is now — securing them, building them to do security work,
+        and building the benchmarks that make sure they’re both secure and effective at their jobs —
+        then leveling up other teams to do the same.
+      </p>
       <p class="prose-p" style="color:var(--fg-1)">
-        A founding member of NVIDIA’s Security Agents for Vulnerability Operations, and a member of
-        the CVE Artificial Intelligence Working Group with MITRE. Mostly: building agents that scale
-        vulnerability operations.
+        With over a decade of cloud experience across complex environments scaling to 25,000+ AWS
+        accounts and 13M+ assets, I’ve delivered on both sides of the line: architecting and
+        delivering the CIEM and CMDB products we sold to customers, and building out security
+        ecosystems on internal teams when no product fit. Along the way I authored two cloud-related
+        patents.
+      </p>
+      <p class="small" style="margin-top:14px">
+        {
+          patents.map((pt, i) => (
+            <>
+              {i > 0 && <span class="faint"> · </span>}
+              <a
+                href={pt.href}
+                target="_blank"
+                rel="noopener"
+                style="font-family:var(--font-mono);font-size:13px"
+              >
+                {pt.id} →
+              </a>
+            </>
+          ))
+        }
       </p>
     </section>
 
@@ -56,47 +78,13 @@ const proud = [
       }
     </section>
 
-    <section class="measure">
-      <h2 class="h2" style="margin-bottom:16px">The short version</h2>
-      <p class="prose-p" style="color:var(--fg-1);margin-bottom:18px">
-        Over fifteen years I’ve built CMDB and CIEM platforms and helped secure environments
-        spanning 25,000+ AWS accounts and 10M+ assets. The environments I work on tend to break
-        vendors — when off-the-shelf tools can’t analyze millions of assets or traverse IAM across
-        thousands of accounts, we build our own.
+    <section class="measure" style="margin-top:8px">
+      <span class="label" style="display:block;margin-bottom:10px">Currently</span>
+      <p class="prose-p" style="color:var(--fg-1)">
+        I help organize <a href="https://fwdcloudsec.org/">fwd:cloudsec North America</a> and sit on the
+        <a href="https://www.cve.org/ProgramOrganization/WorkingGroups">CVE AI Working Group</a>.
+        Open to additional advisory, board, and committee work where that’s useful.
       </p>
-      <p class="prose-p" style="color:var(--fg-1);margin-bottom:18px">
-        A lot of the job is unglamorous plumbing: delivering CSPM visibility across tens of
-        thousands of accounts, killing off long-lived AWS keys with a short-term token service,
-        distributing IAM through GitOps, and standing up self-service provisioning so teams can move
-        without filing tickets. It has survived two acquisitions and scaled to some of the largest
-        cloud deployments in the industry.
-      </p>
-      <p class="body muted">Along the way: {companies.join(', ')}.</p>
-    </section>
-
-    <section style="margin-top:52px;max-width:720px">
-      <h2 class="h2" style="margin-bottom:6px">Five things I’m proud of</h2>
-      <ul class="proud">
-        {
-          proud.map((item, i) => (
-            <li>
-              <span class="proud__n">{String(i + 1).padStart(2, '0')}</span>
-              <span class="body" style="color:var(--fg-1)">
-                {item}
-                {i === 3 && (
-                  <span class="proud__patents">
-                    {patents.map((pt) => (
-                      <a href={pt.href} target="_blank" rel="noopener">
-                        {pt.id} →
-                      </a>
-                    ))}
-                  </span>
-                )}
-              </span>
-            </li>
-          ))
-        }
-      </ul>
     </section>
   </div>
 </BaseLayout>
