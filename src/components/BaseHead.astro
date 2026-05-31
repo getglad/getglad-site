@@ -1,5 +1,5 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION, SITE_AUTHOR, SITE_URL } from '../consts';
+import { SITE_TITLE, SITE_TITLE_FULL, SITE_DESCRIPTION, SITE_AUTHOR, SITE_URL } from '../consts';
 
 interface Props {
   title?: string;
@@ -20,7 +20,7 @@ const {
 } = Astro.props;
 
 const site = Astro.site ?? new URL(SITE_URL);
-const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
+const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE_FULL;
 const canonical = new URL(Astro.url.pathname, site).href;
 const ogImage = new URL(image, site).href;
 ---
