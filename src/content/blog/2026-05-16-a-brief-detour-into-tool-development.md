@@ -4,7 +4,7 @@ description: "To underline how auto mode solves the click-fest from the prior po
 pubDate: 2026-05-16
 slug: "a-brief-detour-into-tool-development"
 categories: ["agentic-ai","nemo-agent-toolkit","tools"]
-series: "Agent Auto Mode"
+series: "Overseer-in-the-loop"
 seriesOrder: 3
 draft: false
 ---

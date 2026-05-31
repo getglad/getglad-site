@@ -4,7 +4,7 @@ description: "Why every agent system eventually needs an auto-mode classifier - 
 pubDate: 2026-05-02
 slug: "the-permission-problem"
 categories: ["agentic-ai","security","permissions"]
-series: "Agent Auto Mode"
+series: "Overseer-in-the-loop"
 seriesOrder: 1
 draft: false
 ---

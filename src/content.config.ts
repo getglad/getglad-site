@@ -18,7 +18,7 @@ const blog = defineCollection({
     legacy: z.boolean().default(false),
     draft: z.boolean().default(false),
     ogImage: z.string().optional(),
-    // Multi-part series grouping (e.g. the Agent Auto Mode build).
+    // Multi-part series grouping (e.g. the Overseer-in-the-loop series).
     series: z.string().optional(),
     seriesOrder: z.number().optional(),
   }),

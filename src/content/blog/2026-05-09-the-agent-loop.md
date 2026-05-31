@@ -4,7 +4,7 @@ description: "So with all those words about autonomy spectrums out of the way, l
 pubDate: 2026-05-09
 slug: "the-agent-loop"
 categories: ["agentic-ai","nemo-agent-toolkit","python"]
-series: "Agent Auto Mode"
+series: "Overseer-in-the-loop"
 seriesOrder: 2
 draft: false
 ---
@@ -73,7 +73,7 @@ async def hitl_current_datetime(_config, _builder):
     )
 ```
 
-![The Agent Auto Mode dashboard paused on a human-in-the-loop approval for the single current_datetime tool, with the live agent trace on the right.](../../assets/blog/post-02-single-tool-hitl.png)
+![The agent dashboard paused on a human-in-the-loop approval for the single current_datetime tool, with the live agent trace on the right.](../../assets/blog/post-02-single-tool-hitl.png)
 _Ask-mode-for-everything: the loop stops and waits for a human before the one tool runs._
 
 The lesson is bigger than NAT. **Unit tests verify pieces; they don't verify wiring.** In agent frameworks, components get connected by the runtime - not by code you can grep for. So you need three layers of tests, not one:

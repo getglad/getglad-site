@@ -3,9 +3,9 @@ import { postUrl } from './postUrl';
 
 /** Editorial blurbs for each series (the post bodies carry the detail). */
 const SERIES_META: Record<string, { blurb: string }> = {
-  'Agent Auto Mode': {
+  'Overseer-in-the-loop': {
     blurb:
-      'Building Claude Code-style “auto mode” on a fully open-source stack, one layer at a time - the agent loop, the action classifier, policy-as-code sandboxing, and the red-team results.',
+      'Practically implementing Auto Mode for your agent loops - the agent loop, the action classifier, policy-as-code sandboxing, and the red-team results, one layer at a time.',
   },
 };
 

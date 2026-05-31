@@ -4,7 +4,7 @@ description: "We ended the last round with a purposefully painful UX - a registe
 pubDate: 2026-05-23
 slug: "guardrails-as-the-action-classifier"
 categories: ["agentic-ai","security","nemo-guardrails"]
-series: "Agent Auto Mode"
+series: "Overseer-in-the-loop"
 seriesOrder: 4
 draft: false
 ---
@@ -108,7 +108,7 @@ At this point, a simple query that once produced a pretty lame click-fest - _"sh
 ![With the demo's "inject evil payload" toggle on, the classifier catches a read_file smuggling a curl exfiltration of .env and blocks it, falling back to a human override.](../../assets/blog/post-04-evil-block.png)
 _The other half of the job: flip the toggle and the same machinery blocks the dangerous call instead of waving it through._
 
-That's the auto-mode payoff: allowing LLMs to interact with the real world at arms length through appropriately scoped tools (via software and workload authentication) - with reasoning and actions still visible, decisions still auditable, just without you in the mix for each pivot point.
+> That's the auto-mode payoff: allowing LLMs to interact with the real world at arms length through appropriately scoped tools (via software and workload authentication) - with reasoning and actions still visible, decisions still auditable, just without you in the mix for each pivot point.
 
 The first half of that sentence is what we've built so far: scoped tools, visible reasoning, an audit trail, no clicks. The next post stops trusting it and _attacks_ it - a red-team battery that drives a corpus of dangerous actions straight at this overseer to measure what actually gets caught. The second half - _workload authentication_, the part that lets an agent prove who it is to the systems it touches - is where the series goes after that, when a Pydantic policy layer and then the OpenShell kernel become ceilings that don't depend on any classifier's judgment.
 

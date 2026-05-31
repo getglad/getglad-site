@@ -3,24 +3,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Portrait from '../components/Portrait.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import { patents } from '../data/patents';
-
-const facts: [string, string][] = [
-  ['Working in cloud', '10+ years'],
-  ['Largest program', '25,000+ AWS accounts · 13M+ assets'],
-];
 ---
 
 <BaseLayout
   title="About"
-  description="Matthew Gladney - cloud and AI security engineering leader building identity-centric security at massive scale."
+  description="Matthew Gladney - cloud security, now securing (and building) the AI agents that do security work. Two patents, CMDB/CIEM platforms, 25k+ AWS accounts."
 >
   <div class="container" style="padding-top:64px">
     <section class="about-intro">
       <div class="about-intro__text">
         <span class="label">About</span>
-        <h1 class="display">Identity-centric security, at massive scale.</h1>
+        <h1 class="display">I kinda have a weird job.</h1>
         <p class="prose-p" style="color:var(--fg-1);max-width:540px">
-          A cloud and AI security engineering leader - and a 2x acquisition survivor.
+          I used to do a lot of cloud security. Now, most days, I’m securing AI agents, building
+          them to do security work, and building the benchmarks that make sure they’re both secure
+          and effective at their jobs - then leveling up other teams to do the same.
         </p>
         <div class="about-socials"><SocialLinks display="icon-label" /></div>
       </div>
@@ -29,26 +26,36 @@ const facts: [string, string][] = [
 
     <section class="measure" style="margin-top:48px">
       <p class="prose-p" style="color:var(--fg-1);margin-bottom:18px">
-        Most days, I take on the security problems that don’t have an answer yet - first it was
-        cloud at the scale that broke a lot of vendors, and now defining how AI agents should work
-        securely. To me, the through-line is the same: a workload may eventually do something you
-        didn’t intend, and we have to design a security posture that anticipates and mitigates the
-        potential for impact. I also believe great security accelerates rather than blocks
-        innovation.
+        After a decade of cloud conversations, I prefer to build platforms that give developers the
+        autonomy they need while keeping security teams happy. This approach has proven useful
+        enough to scale to some pretty large cloud deployments. I’ve built CMDB and CIEM platforms,
+        earned two patents that solved scaled cloud problems, and helped organizations secure
+        environments spanning 25k+ AWS accounts and 13M+ assets.
       </p>
       <p class="prose-p" style="color:var(--fg-1);margin-bottom:18px">
-        Agents are where more of my work is now - securing them, building them to do security work,
-        and building the benchmarks that make sure they’re both secure and effective at their jobs -
-        then leveling up other teams to do the same.
+        The environments I work on tend to break vendors. When off-the-shelf tools couldn’t handle
+        analyzing millions of assets or traversing IAM policies across thousands of accounts, we
+        built our own stuff. Now we’re doing it again for agents (and hopefully doing it well
+        enough). This requires a sometimes exhausting blend of distributed systems, cloud expertise,
+        adversarial thinking and threat modeling, and a willingness to sometimes complain loudly.
+      </p>
+      <p class="prose-p" style="color:var(--fg-1);margin-bottom:18px">
+        I’ve spent time on both sides of the table - building security products at vendors as a
+        principal engineer, and implementing internally around uncommon complexity. I hope this
+        two-sided view helps me understand what actually works in the real world.
+      </p>
+      <p class="prose-p" style="color:var(--fg-1);margin-bottom:18px">
+        Outside the day job, I help organize
+        <a href="https://fwdcloudsec.org/">fwd:cloudsec North America</a> and sit on the
+        <a href="https://www.cve.org/ProgramOrganization/WorkingGroups">CVE AI working group</a>.
       </p>
       <p class="prose-p" style="color:var(--fg-1)">
-        With over a decade of cloud experience across complex environments scaling to 25,000+ AWS
-        accounts and 13M+ assets, I’ve delivered on both sides of the line: architecting and
-        delivering the CIEM and CMDB products we sold to customers, and building out security
-        ecosystems on internal teams when no product fit. Along the way I authored two cloud-related
-        patents.
+        Finally, security involves a lot of coordination between security teams, engineering teams,
+        the agents who just want to ship code, and the humans who get exhausted by all of that. I
+        spend my time writing software, designing architectures, and occasionally explaining why
+        “just open port 22 to 0.0.0.0/0” isn’t a great idea.
       </p>
-      <p class="small" style="margin-top:14px">
+      <p class="small" style="margin-top:20px">
         {
           patents.map((pt, i) => (
             <>
@@ -64,26 +71,6 @@ const facts: [string, string][] = [
             </>
           ))
         }
-      </p>
-    </section>
-
-    <section class="facts">
-      {
-        facts.map(([k, v]) => (
-          <div class="fact">
-            <span class="small muted">{k}</span>
-            <span class="body fact__value">{v}</span>
-          </div>
-        ))
-      }
-    </section>
-
-    <section class="measure" style="margin-top:8px">
-      <span class="label" style="display:block;margin-bottom:10px">Currently</span>
-      <p class="prose-p" style="color:var(--fg-1)">
-        I help organize <a href="https://fwdcloudsec.org/">fwd:cloudsec North America</a> and sit on the
-        <a href="https://www.cve.org/ProgramOrganization/WorkingGroups">CVE AI Working Group</a>.
-        Open to additional advisory, board, and committee work where that’s useful.
       </p>
     </section>
   </div>

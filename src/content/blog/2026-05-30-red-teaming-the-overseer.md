@@ -4,7 +4,7 @@ description: "Last post I built a guardrail and then spent a fair number of word
 pubDate: 2026-05-30
 slug: "red-teaming-the-overseer"
 categories: ["agentic-ai","security","red-team"]
-series: "Agent Auto Mode"
+series: "Overseer-in-the-loop"
 seriesOrder: 5
 draft: false
 ---
