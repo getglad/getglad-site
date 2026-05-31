@@ -52,6 +52,8 @@ export default defineConfig({
   // and marked noindex (see speaking.astro). It still builds but isn't surfaced.
   integrations: [mdx(), sitemap({ filter: (page) => !page.includes('/speaking/') })],
   markdown: {
+    // Off so `--`/`---` and quotes render literally (no auto em/en dashes).
+    smartypants: false,
     shikiConfig: { theme: warmDark, wrap: false },
   },
 });
