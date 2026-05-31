@@ -22,7 +22,7 @@ As an aside - to make this _very_ easy to demonstrate - in the demo UI I've adde
 
 ### From "always gate" to "classify, then decide"
 
-Recall the eight-line middleware of HITL-on-every-call. We now need to update the middleware to have classification spliced in front:
+Recall the eight-line hitl\_approval middleware of HITL-on-every-call. We swap it out for a classifier middleware on the same FunctionGroup - same shape, but the human is now prompted only when the classifier escalates:
 
 ```python
 class ClassifierMiddleware(FunctionMiddleware):
@@ -48,7 +48,7 @@ class ClassifierMiddleware(FunctionMiddleware):
         return REJECTION_MESSAGE
 ```
 
-One simplification in that snippet: I check ALWAYS\_ALLOW\_TOOLS by name to keep it readable, but the shipped code actually runs even read-only tools through the same check\_rules the LLM tier uses. That difference matters - it's the line between read\_file('notes.txt') sailing through and read\_file('.env') getting escalated. A name-only allowlist would hand an agent your credentials on a read; routing through check\_rules is what keeps the A6 case (below) honest. The full version lives in src/guardrails/rules.py.
+One simplification in that snippet: I check ALWAYS\_ALLOW\_TOOLS by name to keep it readable, but the shipped code actually runs even read-only tools through the same check\_rules the LLM tier uses. That difference matters - it's the line between read\_file('notes.txt') sailing through and read\_file('.env') getting escalated. A name-only allowlist would hand an agent your credentials on a read; routing through check\_rules is what keeps the A6 case (below) honest. The full version lives in src/guardrails/rules.py. Two more things the snippet leaves out: classify() returns a typed ClassifyResult(allowed, layer, reason), and it takes a keyword-only skip\_rules flag - the bypass the demo's evil-payload toggle flips to send an action past the deterministic rules and straight to the LLM judge.
 
 The HITL primitive isn't gone - it's been demoted from default to fallback. The human still has the final word on every blocked action; they just don't get asked about the ones judged to be safe.
 
