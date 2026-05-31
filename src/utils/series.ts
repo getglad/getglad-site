@@ -5,7 +5,7 @@ import { postUrl } from './postUrl';
 const SERIES_META: Record<string, { blurb: string }> = {
   'Agent Auto Mode': {
     blurb:
-      'Building Claude Code-style “auto mode” on a fully open-source stack, one layer at a time — the agent loop, the action classifier, policy-as-code sandboxing, and the red-team results.',
+      'Building Claude Code-style “auto mode” on a fully open-source stack, one layer at a time - the agent loop, the action classifier, policy-as-code sandboxing, and the red-team results.',
   },
 };
 

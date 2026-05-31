@@ -31,7 +31,7 @@ The main design goals of a `c7n` orchestrator include:
 
 ## Quick Code Survey
 
-Setting most of these goals as feature requirements on `c7n` would be unfair to the project. It isn’t meant to be a workload orchestrator – it only offers a feature-limited Lambda bundler for convenience.
+Setting most of these goals as feature requirements on `c7n` would be unfair to the project. It isn’t meant to be a workload orchestrator - it only offers a feature-limited Lambda bundler for convenience.
 
 However, to get most of what is needed, the native `c7n` runtime lifecycle must be circumvented, and some custom logic needs to be inserted at its key milestones in the original project’s workflow. A naive approach can be implemented using just a few of the project’s components. Below is a simple example, where `policy` is a set of `c7n` yml converted into JSON/Python `dict`s.
 
@@ -61,7 +61,7 @@ By bypassing the `custodian` launch phase, a project gains the flexibility to co
 
 For instance, a scheduled workload could be designed to iterate through an AWS Organization or a group of Organizations, generate a set of policies with dynamically inserted role or account IDs, and then schedule those policies to be executed by a second worker. Furthermore, it could specify which regions to target for running the account-specific policy. Some or all of these workers could be informed by metadata stores, such as indicating that Account 1 is cleared to use three regions and Account 2 has five regions.
 
-This approach offers opportunities to introduce a policy template convention and explore the possibilities and variations that may arise from it, requiring some – but not much – creative thinking.
+This approach offers opportunities to introduce a policy template convention and explore the possibilities and variations that may arise from it, requiring some - but not much - creative thinking.
 
 ## Workload Orchestration
 
@@ -89,9 +89,9 @@ For example, a first `c7n` task can find all EC2s that do not match a given expe
 
 Leveraging `c7n` as a tool in a full-featured workflow platform instead brings a layer of control flow that the project otherwise lacks.
 
-## Policy Safety – or why not just execute the CLI from a container?
+## Policy Safety - or why not just execute the CLI from a container?
 
-This new design pattern also comes with an important consideration of `custodian` execution security – what assurances can be made that the intended policies are being executed and that `custodian` will not be hijacked into a form of insider threat? There are a few patterns to consider.
+This new design pattern also comes with an important consideration of `custodian` execution security - what assurances can be made that the intended policies are being executed and that `custodian` will not be hijacked into a form of insider threat? There are a few patterns to consider.
 
 ### Forward workload IDs, not workloads
 

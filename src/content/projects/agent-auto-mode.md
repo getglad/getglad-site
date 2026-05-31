@@ -11,11 +11,11 @@ featured: true
 ---
 
 Claude Code's _auto mode_ puts a classifier between the agent and its tools. Agent Auto
-Mode is an attempt to build that pattern — and the layers underneath it — entirely on an
+Mode is an attempt to build that pattern - and the layers underneath it - entirely on an
 open-source stack: NVIDIA's NeMo Agent Toolkit as the runtime, NeMo Guardrails as the
 action classifier, and OpenShell for sandbox policy.
 
 The design is defense-in-depth: the agent's own judgment, a classifier that reasons over
 conversation context, tool-level guards, and a kernel-enforced sandbox each own an
-independent failure domain. It survived a red-team pass clean — zero of fourteen escape
+independent failure domain. It survived a red-team pass clean - zero of fourteen escape
 attempts succeeded.

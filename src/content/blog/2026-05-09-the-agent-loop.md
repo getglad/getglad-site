@@ -12,13 +12,13 @@ _Companion code: the post-02 tag._
 
 So with all those words about autonomy spectrums out of the way, let's build an agent loop.
 
-For the purposes of this series, I'll be making a ReAct agent built on the NeMo Agent Toolkit. In this post, we'll build a basic loop with HITL approval on every tool call — no classifier yet, one basic tool, and some basic hello-world exercises.
+For the purposes of this series, I'll be making a ReAct agent built on the NeMo Agent Toolkit. In this post, we'll build a basic loop with HITL approval on every tool call - no classifier yet, one basic tool, and some basic hello-world exercises.
 
 We're also going to be skipping the YAML configs, etc., so that we can actually have an embeddable implementation and not lean on NAT to also host our exposure points.
 
 ### Embedding NAT by skipping the YAML
 
-Under the hood, NAT parses its YAML into a Config model, passes that to WorkflowBuilder, and calls build() — letting us skip the CLI entirely.
+Under the hood, NAT parses its YAML into a Config model, passes that to WorkflowBuilder, and calls build() - letting us skip the CLI entirely.
 
 ```python
 from nat.builder.workflow_builder import WorkflowBuilder
@@ -46,7 +46,7 @@ async with WorkflowBuilder() as builder:
 
 ### The HITL wiring
 
-To do some sanity checking, for the purposes of this post, every tool call should pause and wait for human approval — we'll call it ask-mode-for-everything, the absolute floor of the autonomy spectrum.
+To do some sanity checking, for the purposes of this post, every tool call should pause and wait for human approval - we'll call it ask-mode-for-everything, the absolute floor of the autonomy spectrum.
 
 To implement this, however, we hit a bit of a wrinkle: the ReAct agent's tool\_node calls \_call\_tool() directly. There's no interception point. The fix was a wrapper tool:
 
@@ -73,21 +73,24 @@ async def hitl_current_datetime(_config, _builder):
     )
 ```
 
-The lesson is bigger than NAT. **Unit tests verify pieces; they don't verify wiring.** In agent frameworks, components get connected by the runtime — not by code you can grep for. So you need three layers of tests, not one:
+![The Agent Auto Mode dashboard paused on a human-in-the-loop approval for the single current_datetime tool, with the live agent trace on the right.](../../assets/blog/post-02-single-tool-hitl.png)
+_Ask-mode-for-everything: the loop stops and waits for a human before the one tool runs._
+
+The lesson is bigger than NAT. **Unit tests verify pieces; they don't verify wiring.** In agent frameworks, components get connected by the runtime - not by code you can grep for. So you need three layers of tests, not one:
 
 | Layer | What it tests | What it catches |
 | --- | --- | --- |
 | Unit | Each function works in isolation | Broken function logic |
-| Integration | The framework actually calls them | Wiring bugs — pieces exist but nothing connects them |
+| Integration | The framework actually calls them | Wiring bugs - pieces exist but nothing connects them |
 | Trajectory | Calls happen in the right order | Approval fires after execution, or tool runs twice |
 
 For the trajectory layer, I patched both prompt\_binary\_approval and the datetime call to append to a shared list, then asserted on the sequence: \["approve", "datetime\_now"\] for an approval, \["approve"\] alone for a rejection (datetime never fires). Same principle as trace-based testing, smaller scope. If you've ever shipped LangGraph or CrewAI or AutoGen and felt the bug-class where "everything works in tests but the agent ignores my guardrail," this is what it was.
 
-As an aside on observability plumbing: NAT's stock react\_agent builds the agent graph _without_ a callback handler, so the LLM tier emits no LLM\_START/LLM\_END events — only the tool calls reach the stream. Rather than monkeypatch the agent internals, I fork NAT's own ReAct register into src/loop/react\_steps.py and attach NAT's LangchainProfilerHandler per run (the same pattern sequential\_executor uses), so model latency and token-by-token streaming flow through the canonical event stream. (An earlier cut of this series carried a BaseAgent.\_stream\_llm monkeypatch plus [PR #1851](https://github.com/NVIDIA/NeMo-Agent-Toolkit/pull/1851) just to get native tool calling working at all; NAT 1.7 shipped that fix, so the patch is gone — a small lesson in pinning your framework version and re-checking your workarounds on every bump.)
+As an aside on observability plumbing: NAT's stock react\_agent builds the agent graph _without_ a callback handler, so the LLM tier emits no LLM\_START/LLM\_END events - only the tool calls reach the stream. Rather than monkeypatch the agent internals, I fork NAT's own ReAct register into src/loop/react\_steps.py and attach NAT's LangchainProfilerHandler per run (the same pattern sequential\_executor uses), so model latency and token-by-token streaming flow through the canonical event stream. (An earlier cut of this series carried a BaseAgent.\_stream\_llm monkeypatch plus [PR #1851](https://github.com/NVIDIA/NeMo-Agent-Toolkit/pull/1851) just to get native tool calling working at all; NAT 1.7 shipped that fix, so the patch is gone - a small lesson in pinning your framework version and re-checking your workarounds on every bump.)
 
 ### Owning the gateway
 
-NAT ships nat serve — a command that consumes a YAML config and launches a FastAPI server that exposes the workflow over HTTP and WebSocket.
+NAT ships nat serve - a command that consumes a YAML config and launches a FastAPI server that exposes the workflow over HTTP and WebSocket.
 
 This series won't use it, to demonstrate how this kind of implementation can be embeddable and to let us actually implement the classifier that sits between the agent and the tool, and create Pydantic policy layers that gate sandbox creation. A planner/validator handshake needs A2A on the back side. Each of these capabilities extends a path that runs through _our_ code. If nat serve is the server, those extensions become compounded indirection with "proxy NAT through our gateway, then proxy back to NAT" gymnastics.
 
@@ -123,7 +126,7 @@ await builder.add_telemetry_exporter(
 )
 ```
 
-Those spans aren't just for debugging — they're the start of the audit trail the rest of the series leans on, where every agent decision stays inspectable after the fact.
+Those spans aren't just for debugging - they're the start of the audit trail the rest of the series leans on, where every agent decision stays inspectable after the fact.
 
 ### Where this leaves us
 
@@ -137,7 +140,7 @@ What's running:
 
 What's lame:
 
--   The agent has one tool. "What time is it?" is the demo. Every interesting task needs file edit, shell, grep, glob — a real surface.
+-   The agent has one tool. "What time is it?" is the demo. Every interesting task needs file edit, shell, grep, glob - a real surface.
 -   Every action prompts for approval. A single "find all TODOs" task generates dozens of tool calls. Click click click click. This is ask mode at its worst and the motivation for what's next.
 
 So let's get to some tool-surface work.

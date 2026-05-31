@@ -10,7 +10,7 @@ export const service: ServiceEntry[] = [
   {
     org: 'fwd:cloudsec',
     role: 'Organizing committee',
-    period: '2026–present',
+    period: '2026-present',
     href: 'https://fwdcloudsec.org/',
   },
   {

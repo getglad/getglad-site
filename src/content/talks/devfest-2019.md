@@ -2,7 +2,7 @@
 title: 'Weathering the cloud: a story of managing 900 AWS environments'
 event: 'DevFest'
 date: 2019-11-01
-description: 'What it takes to keep a large multi-account AWS estate from drifting into chaos — guardrails, automation, and organizational glue.'
+description: 'What it takes to keep a large multi-account AWS estate from drifting into chaos - guardrails, automation, and organizational glue.'
 youtubeId: 'e3iHa-rmlJU'
 role: 'speaker'
 ---

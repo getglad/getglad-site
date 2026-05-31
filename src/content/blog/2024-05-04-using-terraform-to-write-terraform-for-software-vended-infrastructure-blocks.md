@@ -14,9 +14,9 @@ The success of this strategy in modern deployment strategies is evident in the w
 
 Imagine a process where a cloud management team has provided a set of modules to deploy opinionated, secure-by-default VPCs and IAM roles. At first, the cloud team may have managed the PR process related to getting these in place behind the scenes for other engineering teams. Yet, as the request volume increased, the process, which was an abstract Jira ticket for most folks, was moved to having individual teams open their own PRs to reduce bottlenecks. Now, engineers are trying to use an unfamiliar module to request new deployments. The engineer has to research the module and understand its flags, and the owning team has to review the PR, which, given its unfamiliarity, may have errors that require a “request for change” or three. For small teams, this cycle may pose a manageable challenge that fits within some version of its ordinary course of business.
 
-However, the manual work linked with Terraform can pose a significant time burden when managing large-scale operations. The accumulation of minor frictions in generating and reviewing the code can lead to the realization that the process needs to be automated. At this point, the team is confronted with a decision – should they abandon their well-established Terraform strategy in favor of a new bespoke software project that replicates all the API orchestration they’ve relied on so far (along with all the related DevEx investment to deliver a new internal project to the organization)?
+However, the manual work linked with Terraform can pose a significant time burden when managing large-scale operations. The accumulation of minor frictions in generating and reviewing the code can lead to the realization that the process needs to be automated. At this point, the team is confronted with a decision - should they abandon their well-established Terraform strategy in favor of a new bespoke software project that replicates all the API orchestration they’ve relied on so far (along with all the related DevEx investment to deliver a new internal project to the organization)?
 
-Fortunately, leveraging Terraform providers as `golang` libraries offers a (mostly) direct route to assist teams in maintaining their Terraform strategy – `git` repo and all – while allowing software to handle most of the workload and accelerate their delivery cycles.
+Fortunately, leveraging Terraform providers as `golang` libraries offers a (mostly) direct route to assist teams in maintaining their Terraform strategy - `git` repo and all - while allowing software to handle most of the workload and accelerate their delivery cycles.
 
 ## Using hclwrite
 
@@ -120,7 +120,7 @@ The goal of a well-designed automation system should be:
 2.  To reduce errors
 3.  To create more predictable outcomes
 
-So, while a naive approach could have an engineer review the provider’s documentation and replicate each resource block as a `struct` in their own code base, that _definitely_ does not sound like a good way to save time. It also provides no hard assurances that the HCL generated will be valid both at ship time and after six months of updates – at least without a heavily invested integration testing suite.
+So, while a naive approach could have an engineer review the provider’s documentation and replicate each resource block as a `struct` in their own code base, that _definitely_ does not sound like a good way to save time. It also provides no hard assurances that the HCL generated will be valid both at ship time and after six months of updates - at least without a heavily invested integration testing suite.
 
 It’s better if the provider itself can be used. For example, the GitHub provider could be used to create a validated `github_repository` block using a generic blob of JSON loaded as a `map`.
 
@@ -159,11 +159,11 @@ func GithubRepositoryValidateInput(input map[string]interface{}) []error {
 }
 ```
 
-`GithubRepository` and `GithubRepositoryBlock` largely build on the patterns established by the earlier examples in `TerraformBlock` and `ProviderBlock` – they create new empty HCL objects and fill them in. But this time, they do it based on a given input.
+`GithubRepository` and `GithubRepositoryBlock` largely build on the patterns established by the earlier examples in `TerraformBlock` and `ProviderBlock` - they create new empty HCL objects and fill them in. But this time, they do it based on a given input.
 
-`GithubRepositoryValidateInput`, on the other hand, is part of the software’s trust-building strategy. Each Terraform provider should implement a [set of validators](https://developer.hashicorp.com/terraform/plugin/framework/internals/rpcs#validateconfig-rpcs), which gives the implementation a built-in capability to validate the input being sent for processing – batteries included!
+`GithubRepositoryValidateInput`, on the other hand, is part of the software’s trust-building strategy. Each Terraform provider should implement a [set of validators](https://developer.hashicorp.com/terraform/plugin/framework/internals/rpcs#validateconfig-rpcs), which gives the implementation a built-in capability to validate the input being sent for processing - batteries included!
 
-Unfortunately, this method only _validates_ the input – it does not convert it into HCL. To do that with the least amount of intervention possible, we’ll need one more method: a `GenericHCLMaker`.
+Unfortunately, this method only _validates_ the input - it does not convert it into HCL. To do that with the least amount of intervention possible, we’ll need one more method: a `GenericHCLMaker`.
 
 ## Making a Generic Provider Resource HCL Block
 

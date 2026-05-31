@@ -1,5 +1,5 @@
 /* ============================================================
-   getglad.me — quiet editorial design system
+   getglad.me - quiet editorial design system
    Warm paper, IBM Plex Serif headlines, ink-on-cream, one deep
    pine-green accent with a sparing warm-clay secondary. Mono = code.
    Ported from the Claude Design handoff (colors_and_type.css + kit).
@@ -11,13 +11,13 @@
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --font-serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
 
-  /* ---------- Surfaces — warm paper ---------- */
+  /* ---------- Surfaces - warm paper ---------- */
   --bg-0: #f4f0e7; /* page */
   --bg-1: #fbf8f1; /* surface / card */
   --bg-2: #ece6d8; /* raised / sunken */
   --bg-3: #e4ddcc; /* hover */
 
-  /* ---------- Ink — warm charcoal ---------- */
+  /* ---------- Ink - warm charcoal ---------- */
   --fg-0: #262320;
   --fg-1: #55504a;
   --fg-2: #8a8377;
@@ -26,7 +26,7 @@
   --border: rgba(38, 35, 30, 0.12);
   --border-strong: rgba(38, 35, 30, 0.22);
 
-  /* ---------- Accent — deep muted pine ---------- */
+  /* ---------- Accent - deep muted pine ---------- */
   --accent: #2f6049;
   --accent-strong: #264e3b;
   --accent-dim: #1d3c2e;
@@ -34,7 +34,7 @@
   --accent-tint: rgba(47, 96, 73, 0.1);
   --accent-line: rgba(47, 96, 73, 0.28);
 
-  /* ---------- Secondary — warm clay (series / multi-part) ---------- */
+  /* ---------- Secondary - warm clay (series / multi-part) ---------- */
   --accent-2: #b0623a;
   --accent-2-tint: rgba(176, 98, 58, 0.1);
   --accent-2-line: rgba(176, 98, 58, 0.3);
@@ -262,7 +262,7 @@ a:hover {
   line-height: var(--lh-relaxed);
 }
 
-/* Kicker label — small sans, sentence case, NOT uppercase */
+/* Kicker label - small sans, sentence case, NOT uppercase */
 .label {
   font-family: var(--font-sans);
   font-weight: 600;
@@ -888,7 +888,7 @@ a:hover {
 }
 
 /* ============================================================
-   Prose (rendered markdown body) — serif reading
+   Prose (rendered markdown body) - serif reading
    ============================================================ */
 .prose {
   font-family: var(--font-serif);
@@ -955,7 +955,7 @@ a:hover {
   border-radius: var(--r-xs);
 }
 
-/* code blocks — warm-dark, via the custom Shiki theme (bg/fg inline) */
+/* code blocks - warm-dark, via the custom Shiki theme (bg/fg inline) */
 .prose pre.astro-code,
 pre.astro-code {
   font-family: var(--font-mono);
