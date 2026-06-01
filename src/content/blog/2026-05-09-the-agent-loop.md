@@ -120,7 +120,7 @@ It's also worth mentioning that for OTel tracing NAT has its own span pipeline (
 await builder.add_telemetry_exporter(
     "otel",
     OtelCollectorTelemetryExporter(
-        project="agent-auto-mode",
+        project="overseer-in-the-loop",
         endpoint=settings.otel_endpoint,
     ),
 )
