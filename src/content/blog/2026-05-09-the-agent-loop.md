@@ -8,7 +8,7 @@ series: "Overseer-in-the-loop"
 seriesOrder: 2
 draft: false
 ---
-_Companion code: the post-02 tag._
+_Companion code: the [post-02 tag](https://github.com/getglad/overseer-in-the-loop/tree/post-02)._
 
 So with all those words about autonomy spectrums out of the way, let's build an agent loop.
 

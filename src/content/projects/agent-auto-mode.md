@@ -1,10 +1,11 @@
 ---
 title: 'Overseer-in-the-loop'
-summary: "Practically implementing Auto Mode for agent loops, on an open-source stack, with defense-in-depth and a clean red-team pass."
+summary: 'Practically implementing Auto Mode for agent loops, on an open-source stack, with defense-in-depth and a code-first red-team battery.'
 status: 'active'
+repoUrl: 'https://github.com/getglad/overseer-in-the-loop'
 tech: ['NeMo Agent Toolkit', 'NeMo Guardrails', 'OpenShell', 'Supabase']
 highlights:
-  - 'Red-teamed: 0 of 14 escape attempts succeeded'
+  - 'Code-first red-team battery scoring the action gate'
   - 'Independent enforcement across four layers'
 order: 2
 featured: true
@@ -17,7 +18,8 @@ OpenShell for sandbox policy.
 
 The design is defense-in-depth: the agent's own judgment, a classifier that reasons over
 conversation context, tool-level guards, and a kernel-enforced sandbox each own an independent
-failure domain. It survived a red-team pass clean - zero of fourteen escape attempts succeeded.
+failure domain. A code-first red-team battery drives a corpus of adversarial probes straight at the
+action classifier and scores where it holds - and where it doesn't.
 
 I'm building it in the open, one layer at a time - start with
 [The Permission Problem](/writing/the-permission-problem/).

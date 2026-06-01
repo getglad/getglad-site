@@ -8,7 +8,7 @@ series: "Overseer-in-the-loop"
 seriesOrder: 4
 draft: false
 ---
-_Companion code: the post-04 tag._
+_Companion code: the [post-04 tag](https://github.com/getglad/overseer-in-the-loop/tree/post-04)._
 
 We ended the last round with a purposefully painful UX - a registered FunctionGroup middleware named hitl\_approval, sitting between the agent and every tool call, prompting the human every time.
 

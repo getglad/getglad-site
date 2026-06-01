@@ -8,7 +8,7 @@ series: "Overseer-in-the-loop"
 seriesOrder: 1
 draft: false
 ---
-_Companion repo: the post-01 tag is the project scaffold - code starts in Post 2._
+_Companion repo: the [post-01 tag](https://github.com/getglad/overseer-in-the-loop/tree/post-01) is the project scaffold - code starts in Post 2._
 
 I should say from the top that this is one of those meta "why" comes before the "how" intros, so there won't be any code in the next few paragraphs. I'll make up for it, though, with a runnable system to show off some level of capability in the next several to come. For now, however, I'll try to earn the right to make you read the others.
 

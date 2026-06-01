@@ -8,7 +8,7 @@ series: "Overseer-in-the-loop"
 seriesOrder: 3
 draft: false
 ---
-_Companion code: the post-03 tag._
+_Companion code: the [post-03 tag](https://github.com/getglad/overseer-in-the-loop/tree/post-03)._
 
 To underline how auto mode solves the click-fest from the prior post, we need the pain to _feel_ real. We're going to briefly get into tool construction and registration in NAT to build out that surface - each one still gated by a HITL approval, because we're still on the floor of the autonomy spectrum.
 

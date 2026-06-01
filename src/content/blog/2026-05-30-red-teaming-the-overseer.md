@@ -8,7 +8,7 @@ series: "Overseer-in-the-loop"
 seriesOrder: 5
 draft: false
 ---
-_Companion code: the post-05 tag._
+_Companion code: the [post-05 tag](https://github.com/getglad/overseer-in-the-loop/tree/post-05)._
 
 Last post I built a guardrail and then spent a fair number of words telling you it works. You should not believe me. A guardrail you haven't attacked isn't a control, it's a vibe - and the whole point of building an overseer was that we didn't want to take the _agent's_ word for things. It'd be a little rich to then ask you to take _my_ word for the overseer.
 
